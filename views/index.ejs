@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+            
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color:white;
+    }
+
+    body{
+        font-family: Poppins, sans-serif;
+        background-color: rgb(60, 62, 67);
+    }
+
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 9vh;
+    }
+
+    .form-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-container input{
+        margin-top: 25px;
+        width: 300px;
+        padding: 8px 10px;
+        color: rgb(0, 0, 0);
+    }
+
+    .form-container button{
+        width: 200px;
+
+        margin-top: 10px;
+        padding: 8px 10px;
+        color: black;
+        border-radius: 20px;
+        border: none;
+        font-family: Poppins, sans-serif;
+        /* margin-left: px; */
+    }
+
+    .tasksContainer{
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .taskContainer{
+        border: 1px solid white;
+        display: flex;
+        padding: 20px 20px;
+        /* margin-top: 2px; */
+    }
+
+    #edit-form #updated-name{
+        padding: 1px 10px;
+        color: black;
+        font-family: Poppins;
+        margin: 0px 20px;
+    }
+
+    #edit-form button, #delete-form button{
+        padding: 4px 15px;
+        color: black;
+        font-family: Poppins, sans-serif;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create a Task</h2>
+        <div class="formbox">
+            <form class ="form-container" method ="post" action="/">
+                <!-- <label for="name">/label> -->
+                <input type="text" id = "name" name="taskName" required>
+                <button class="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <%taskList.forEach(task=>{%>
+    <div class="tasksContainer">
+        <div class="taskContainer">
+            <%= task.taskName %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID:&nbsp;<%= task._id %>
+            <!-- <a><i class="fa-solid fa-pen-to-square"></i></a> -->
+            <form action="/edit" method="post" id="edit-form">
+                <input type="hidden" name="taskID" value="<%= task._id %>">
+                <input type="text" name ="updatedName" id = "updated-name">
+                <button type="submit">Edit</button>
+              </form>
+
+
+            <form action="/delete" method="post" id="delete-form">
+                <input type="hidden" name="taskID" value="<%= task._id %>">
+                <button type="submit">Delete</button>
+              </form>
+        </div>
+    </div>
+<%})%>
+<div class="container">
+    <!-- <form class ="container" method ="post" action="/delete">
+        <!-- <label for="name">/label> -->
+        <!-- <input type="text" id = "taskID" name="taskID"> -->
+        <!-- <button class="submit">Submit</button>
+         -->
+    <!-- </form> -->
+    
+</div>
+</body>
+<script>
+    function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+</html>
